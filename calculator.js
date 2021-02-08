@@ -1,7 +1,5 @@
 setupButtonPressDisplay();
-setupEqualsKey();
-setupNumberKeys();
-setupOperatorKeys();
+setupKeyPresses();
 
 function setupButtonPressDisplay() {
     let buttons = document.querySelectorAll("button");
@@ -11,20 +9,15 @@ function setupButtonPressDisplay() {
     });
 }
 
-function setupEqualsKey() {
+function setupKeyPresses() {
     document.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
             document.getElementById("equals").click();
+        } else if (e.key.match(/[0-9+*/-]/g)) {
+            console.log(e.key);
+            document.getElementById(`${e.key}`).click();
         }
     }); 
-}
-
-function setupNumberKeys() {
-
-}
-
-function setupOperatorKeys() {
-    
 }
 
 function displayButtonPress() {
