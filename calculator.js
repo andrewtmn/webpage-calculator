@@ -1,4 +1,7 @@
 setupButtonPressDisplay();
+setupEqualsKey();
+setupNumberKeys();
+setupOperatorKeys();
 
 function setupButtonPressDisplay() {
     let buttons = document.querySelectorAll("button");
@@ -6,6 +9,22 @@ function setupButtonPressDisplay() {
     buttons.forEach((button) => {
         button.addEventListener("click", displayButtonPress);
     });
+}
+
+function setupEqualsKey() {
+    document.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+            document.getElementById("equals").click();
+        }
+    }); 
+}
+
+function setupNumberKeys() {
+
+}
+
+function setupOperatorKeys() {
+    
 }
 
 function displayButtonPress() {
@@ -45,7 +64,6 @@ function calculateResult() {
     display.textContent = `${operate(x, y, op)}`;
 }
 
-
 function operate(x, y, op) {
     switch (op) {
         case '+':
@@ -57,7 +75,7 @@ function operate(x, y, op) {
         case '/':
             return divide(x, y);
         default:
-            return "Invalid operator";
+            return "";
     }
 }
 
