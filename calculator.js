@@ -1,5 +1,6 @@
 setupButtonPressDisplay();
 setupKeyPresses();
+setupClearKeyPress();
 
 function setupButtonPressDisplay() {
     let buttons = document.querySelectorAll("button");
@@ -14,10 +15,17 @@ function setupKeyPresses() {
         if (e.key === "Enter") {
             document.getElementById("equals").click();
         } else if (e.key.match(/[0-9+*/-]/g)) {
-            console.log(e.key);
             document.getElementById(`${e.key}`).click();
         }
     }); 
+}
+
+function setupClearKeyPress() {
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace" || e.key === "Delete") {
+            document.getElementById("clear").click();
+        }
+    });
 }
 
 function displayButtonPress() {
