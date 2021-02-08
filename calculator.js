@@ -10,16 +10,25 @@ function setupButtonPressDisplay() {
 
 function displayButtonPress() {
     let symbol = this.textContent;
-    let console = document.getElementById("calculator-display");
+    let display = document.getElementById("calculator-display");
 
     if (symbol.match(/[0-9]/g)) {
-        console.textContent += `${symbol}`;
+        display.textContent += `${symbol}`;
     } else if (symbol.match(/[*\-+/]/g)) {
-        console.textContent += ` ${symbol} `;
+        appendOperator(symbol);
     } else if (symbol.match(/[=]/g)) {
         calculateResult();
     } else if (symbol.match("Clear")) {
-        console.textContent = "";
+        display.textContent = "";
+    }
+}
+
+function appendOperator(symbol) {
+    let display = document.getElementById("calculator-display");
+    let currentExpr = display.textContent;
+
+    if (currentExpr.charAt(currentExpr.length - 1).match(/[0-9]/g)) {
+        display.textContent += ` ${symbol} `;
     }
 }
 
