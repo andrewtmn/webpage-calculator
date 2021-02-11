@@ -37,7 +37,7 @@ function displayButtonPress() {
     } else if (symbol.match(/[*\-+/]/g)) {
         appendOperator(symbol);
     } else if (symbol.match(/[=]/g)) {
-        calculateResult();
+        evaluateExpression();
     } else if (symbol.match("Clear")) {
         display.textContent = "";
     }
@@ -47,12 +47,26 @@ function appendOperator(symbol) {
     let display = document.getElementById("calculator-display");
     let currentExpr = display.textContent;
 
+    if (!isANumber(currentExpr)) {
+        evaluateExpression();
+    } 
+    
     if (currentExpr.charAt(currentExpr.length - 1).match(/[0-9]/g)) {
         display.textContent += ` ${symbol} `;
     }
 }
 
-function calculateResult() {
+function isANumber(str) {
+    let num = Number(str);
+
+    if (Number.isNaN(num)) {
+        return false;
+    }
+
+    return true;
+}
+
+function evaluateExpression() {
     let display = document.getElementById("calculator-display");
     let expr = display.textContent;
 
