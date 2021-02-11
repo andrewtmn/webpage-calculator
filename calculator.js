@@ -86,11 +86,18 @@ function evaluateExpression() {
     let display = document.getElementById("calculator-display");
     let expr = display.textContent;
 
+    if (!expr.charAt(expr.length - 1).match(/[0-9]/g)) {
+        display.textContent = "Invalid Expression";
+        return;
+    }
+
     let elements = expr.split(" ", 3);
 
     let x = Number(elements[0]);
     let y = Number(elements[2]);
     let op = elements[1];
+
+    console.log(`${x}, ${y}, ${op}`);
 
     display.textContent = `${operate(x, y, op)}`;
 }
