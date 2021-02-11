@@ -33,14 +33,30 @@ function displayButtonPress() {
     let display = document.getElementById("calculator-display");
 
     if (symbol.match(/[0-9]/g)) {
-        display.textContent += `${symbol}`;
+        appendNumber(symbol); 
     } else if (symbol.match(/[*\-+/]/g)) {
         appendOperator(symbol);
     } else if (symbol.match(/[=]/g)) {
         evaluateExpression();
     } else if (symbol.match("Clear")) {
-        display.textContent = "";
+        clearDisplay();
     }
+}
+
+function appendNumber(symbol) {
+    let display = document.getElementById("calculator-display");
+    
+    let currentExpr = display.textContent;
+    let len = currentExpr.length;
+    if (!currentExpr.charAt(len - 1).match(/[0-9]/g) && 
+        !currentExpr.charAt(len - 2).match(/[*\-+/]/g)) {
+        clearDisplay();
+    }
+    display.textContent += `${symbol}`;
+}
+
+function clearDisplay() {
+    document.getElementById("calculator-display").textContent = "";
 }
 
 function appendOperator(symbol) {
@@ -88,6 +104,9 @@ function operate(x, y, op) {
         case '*':
             return multiply(x, y);
         case '/':
+            if (y === 0) {
+                return "Divide by Zero Err";
+            }
             return divide(x, y);
         default:
             return "";
